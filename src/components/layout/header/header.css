@@ -1,0 +1,35 @@
+.header {
+    width: 100%;
+}
+
+.header-content {
+    display: flex;
+    justify-content: space-around;
+}
+
+.logo {
+    padding: 1rem;
+}
+
+.navigation {
+    display: flex;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+    height: 100%;
+}
+
+.item {
+    padding: 1rem;
+}
+
+.link {
+    text-decoration: none;
+    padding: 1rem;
+    color: #ACACAC;
+}
+
+.link:hover {
+    color: #000000;
+}
