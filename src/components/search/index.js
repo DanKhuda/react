@@ -39,4 +39,4 @@ const mapDispatchToProps = {
     fetchSearchImages
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Search);
+export default connect(null, mapDispatchToProps)(Search);

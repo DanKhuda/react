@@ -12,7 +12,7 @@ class ImageList extends Component {
     }
 
     render() {
-        const {resImages} = this.props;
+        const {resImages = []} = this.props;
         return (
             <section className="image-list">
                 <div className="image-list__content">
@@ -25,9 +25,12 @@ class ImageList extends Component {
     }
 }
 
-const mapStateToProps = state => ({
-    resImages: getResultImages(state),
-});
+const mapStateToProps = state => {
+    const {searchImages} = state.resultPage;
+    return {
+        resImages: searchImages
+    }
+};
 
 const mapDispatchToProps = {
 
