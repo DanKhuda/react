@@ -6,7 +6,7 @@ const initialState = {
     searchImages: []
 };
 
-export default (state = initialState, {type, images, searchImages}) => {
+export default (state = initialState, {type, searchImages}) => {
     switch (type) {
         case FETCH_SEARCH_IMAGES_SUCCESS:
             return {...state, searchImages: [
