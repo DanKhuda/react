@@ -1,18 +1,19 @@
 import React from 'react';
+import {Link} from "react-router";
 import "./header.css"
 import logo from '../../../assets/logo.png';
 
-const Header = (props) => {
+const Header = () => {
     return(
         <header className='header'>
             <div className='header-content'>
                 <div className='logo'>
-                    <a href="/" className="link"><img className='logo-image' src={logo} alt="logo"/></a>
+                    <Link to={'/'} className='link'><img className='logo-image' src={logo} alt="logo"/></Link>
                 </div>
                 <nav className='menu'>
                     <ul className='navigation'>
                         <li className='item'>
-                            <a href="/" className="link">Home</a>
+                            <Link to={'/'} className='link'>Home</Link>
                         </li>
                         <li className='item'>
                             <a href="/" className="link">Link 1</a>
