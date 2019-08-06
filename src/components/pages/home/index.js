@@ -1,5 +1,4 @@
 import React from 'react';
-// import "./home.css";
 import Search from "../../search"
 import ImageList from "../../imageList";
 import "./home.css"

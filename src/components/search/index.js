@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 import {connect} from "react-redux";
 import "./search.css";
 import {fetchSearchImages} from "../../actions";
-import {getResultImages} from "../../selectors";
 
 class Search extends Component{
     constructor (props) {
@@ -10,10 +9,6 @@ class Search extends Component{
         this.state = {
             val: ''
         };
-    }
-
-    componentDidMount() {
-
     }
 
     onInputChange = (event) => {
@@ -26,8 +21,6 @@ class Search extends Component{
     };
 
     render() {
-        const {images} = this.props;
-        console.log(images);
         return (
             <section className="search">
                 <form onSubmit={this.onFormSubmit} className="search-form">

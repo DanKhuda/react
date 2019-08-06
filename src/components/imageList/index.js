@@ -1,8 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from "react-redux";
-
-import {fetchImages} from "../../actions";
 import {getResultImages} from '../../selectors';
+import ImageCard from '../imageCard';
 import './image-list.css';
 
 class ImageList extends Component {
@@ -12,28 +11,13 @@ class ImageList extends Component {
         };
     }
 
-    componentDidMount() {
-        this.props.fetchImages()
-    }
-
-    renderImage (image, index) {
-        return (
-            <div className='images-grid__item' key={index}>
-                <img src={image.urls.small} className="image" alt={image.id} />
-            </div>
-        )
-    }
-
     render() {
         const {resImages} = this.props;
-        console.log(resImages.length);
         return (
             <section className="image-list">
                 <div className="image-list__content">
                     <div className='images-grid'>
-                        {
-                            resImages.map((image, index) => this.renderImage(image, index))
-                        }
+                        {resImages.map((item) => <ImageCard key={item.id} image={item} />)}
                     </div>
                 </div>
             </section>
@@ -46,7 +30,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = {
-    fetchImages
+
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(ImageList);
