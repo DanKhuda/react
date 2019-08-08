@@ -7,9 +7,8 @@ import location from "../../../assets/location.png"
 import downloads from "../../../assets/download.png"
 
 import "./image.css";
-import {getImageById} from "../../../selectors";
 
-class Image extends Component{
+class Image extends Component {
 
     componentDidMount() {
         this.props.fetchImageById(this.props.params.id);
@@ -22,7 +21,7 @@ class Image extends Component{
             <section className="photo">
                 <div className="photo__content">
                     <p className="photo__description">
-                        { image.description }
+                        { image.description || image.alt_description }
                     </p>
                     <div className="preview">
                         { image.urls && <img src={image.urls.regular} className="preview__image" alt={image.alt_description} />}
@@ -30,7 +29,7 @@ class Image extends Component{
                     <div className="info">
                         <p className="info__item">
                             <img src={location} className="info__icons" alt="location" />
-                            { image.location && image.location.title }
+                            { image.location && image.location.title || "Test" }
                         </p>
                         <div className="info__item">
                             <img src={downloads} className="info__icons downloads" alt="location" />
@@ -49,15 +48,20 @@ Image.propTypes = {
 
 Image.defaultProps = {
   image: {
+      description: "Default description",
+      location: 'Default loc',
       urls: {
           full: "test"
       }
   }
 };
 
-const mapStateToProps = state => ({
-    image: getImageById(state)
-});
+const mapStateToProps = state => {
+    const {image} = state.imagePage;
+    return {
+        image: image
+    }
+};
 
 const mapDispatchToProps = {
     fetchImageById

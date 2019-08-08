@@ -31,10 +31,6 @@ class Search extends Component{
     }
 }
 
-const mapStateToProps = state => ({
-
-});
-
 const mapDispatchToProps = {
     fetchSearchImages
 };

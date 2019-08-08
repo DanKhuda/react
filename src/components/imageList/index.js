@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import {connect} from "react-redux";
-import {getResultImages} from '../../selectors';
 import ImageCard from '../imageCard';
 import './image-list.css';
 
@@ -32,8 +31,4 @@ const mapStateToProps = state => {
     }
 };
 
-const mapDispatchToProps = {
-
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(ImageList);
+export default connect(mapStateToProps, null)(ImageList);
