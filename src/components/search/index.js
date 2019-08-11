@@ -1,38 +1,12 @@
 import React, {Component} from 'react';
-import {connect} from "react-redux";
 import "./search.css";
-import {fetchSearchImages} from "../../actions";
 
-class Search extends Component{
-    constructor (props) {
-        super(props);
-        this.state = {
-            val: ''
-        };
-    }
+const Search = (props) => (
+    <section className="search">
+        <form onSubmit={props.onSubmit} className="search-form">
+            <input type="text" className="search-form__input" value={props.value} onChange={props.onChange} placeholder="Search photos" />
+        </form>
+    </section>
+);
 
-    onInputChange = (event) => {
-        this.setState({val: event.target.value})
-    };
-
-    onFormSubmit  = (event) => {
-        event.preventDefault();
-        this.props.fetchSearchImages(this.state.val);
-    };
-
-    render() {
-        return (
-            <section className="search">
-                <form onSubmit={this.onFormSubmit} className="search-form">
-                    <input type="text" className="search-form__input" value={this.state.val} onChange={this.onInputChange} placeholder="Search photos" />
-                </form>
-            </section>
-        )
-    }
-}
-
-const mapDispatchToProps = {
-    fetchSearchImages
-};
-
-export default connect(null, mapDispatchToProps)(Search);
+export default Search;

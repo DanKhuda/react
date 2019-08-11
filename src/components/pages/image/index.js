@@ -16,7 +16,6 @@ class Image extends Component {
 
     render() {
         const {image} = this.props;
-        console.log(image);
         return (
             <section className="photo">
                 <div className="photo__content">
@@ -29,7 +28,7 @@ class Image extends Component {
                     <div className="info">
                         <p className="info__item">
                             <img src={location} className="info__icons" alt="location" />
-                            { image.location && image.location.title || "Test" }
+                            { (image.location && image.location.title) || "Test" }
                         </p>
                         <div className="info__item">
                             <img src={downloads} className="info__icons downloads" alt="location" />

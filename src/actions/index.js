@@ -4,7 +4,7 @@ import {
     FETCH_SEARCH_IMAGES_FAILURE,
     FETCH_IMAGE_BY_ID_START,
     FETCH_IMAGE_BY_ID_SUCCESS,
-    FETCH_IMAGE_BY_ID_FAILURE
+    FETCH_IMAGE_BY_ID_FAILURE, FETCH_LOAD_IMAGES_START, FETCH_LOAD_IMAGES_FAILURE, FETCH_LOAD_IMAGES_SUCCESS
 } from "../actionTypes";
 
 import {
@@ -33,9 +33,9 @@ export const searchImagesFetchSuccess = searchImages => {
     }
 };
 
-export const fetchSearchImages = (query) => {
+export const fetchSearchImages = (query, page) => {
     const userId = '24b892b15e1d6bdefacce0a40024ac9f02dc98242074a8cf88f1e2305c143762';
-    const url = `${apiSearchImagesUrl}?query=${query}&client_id=${userId}`;
+    const url = `${apiSearchImagesUrl}?query=${query}&page=${page}&client_id=${userId}`;
     return dispatch => {
         dispatch(searchImagesFetchStart(true));
         fetch(url)
@@ -49,6 +49,46 @@ export const fetchSearchImages = (query) => {
             .then(response => response.json())
             .then(items => dispatch(searchImagesFetchSuccess(items)))
             .catch(() => dispatch(searchImagesFetchFailed(true)))
+    };
+};
+
+export const loadImagesFetchStart = start => {
+    return {
+        type: FETCH_LOAD_IMAGES_START,
+        isLoading: start
+    };
+};
+
+export const loadImagesFetchFailed = error => {
+    return {
+        type: FETCH_LOAD_IMAGES_FAILURE,
+        error
+    }
+};
+
+export const loadImagesFetchSuccess = loadImages => {
+    return {
+        type: FETCH_LOAD_IMAGES_SUCCESS,
+        loadImages
+    }
+};
+
+export const fetchLoadImages = (query, page) => {
+    const userId = '24b892b15e1d6bdefacce0a40024ac9f02dc98242074a8cf88f1e2305c143762';
+    const url = `${apiSearchImagesUrl}?query=${query}&page=${page}&client_id=${userId}`;
+    return dispatch => {
+        dispatch(loadImagesFetchStart(true));
+        fetch(url)
+            .then(response => {
+                if (!response.ok) {
+                    throw Error(response.statusText);
+                }
+                dispatch(loadImagesFetchStart(false));
+                return response;
+            })
+            .then(response => response.json())
+            .then(items => dispatch(loadImagesFetchSuccess(items)))
+            .catch(() => dispatch(loadImagesFetchFailed(true)))
     };
 };
 

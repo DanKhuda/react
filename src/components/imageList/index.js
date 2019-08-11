@@ -2,13 +2,30 @@ import React, {Component} from 'react';
 import {connect} from "react-redux";
 import ImageCard from '../imageCard';
 import './image-list.css';
+import {fetchLoadImages} from "../../actions";
 
 class ImageList extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            page: 0
         };
     }
+
+    componentDidMount() {
+        window.addEventListener('scroll', this.onScroll, false);
+    }
+
+    onPaginatedSearch = (e) => {
+        this.setState({page: this.state.page + 1});
+        this.props.fetchLoadImages(this.props.query, this.state.page);
+    };
+
+    onScroll = () => {
+        if (window.innerHeight + document.documentElement.scrollTop + 1 >= document.documentElement.offsetHeight){
+            this.onPaginatedSearch();
+        }
+    };
 
     render() {
         const {resImages = []} = this.props;
@@ -22,6 +39,10 @@ class ImageList extends Component {
             </section>
         )
     }
+
+    componentWillUnmount() {
+        window.removeEventListener('scroll', this.onScroll, false);
+    }
 }
 
 const mapStateToProps = state => {
@@ -31,4 +52,8 @@ const mapStateToProps = state => {
     }
 };
 
-export default connect(mapStateToProps, null)(ImageList);
+const mapDispatchToProps = {
+    fetchLoadImages
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(ImageList);
