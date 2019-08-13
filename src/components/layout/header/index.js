@@ -5,6 +5,7 @@ import logo from '../../../assets/logo.png';
 import {connect} from "react-redux";
 import {fetchCollections} from "../../../actions";
 import ImageCard from "../../imageCard";
+import Menu from "../menu";
 
 
 class Header extends Component{
@@ -19,7 +20,6 @@ class Header extends Component{
 
     render() {
         const {collections} = this.props;
-        console.log(collections);
         return (
             <header className='header'>
                 <div className='header-content'>
@@ -31,13 +31,7 @@ class Header extends Component{
                             <li className='item'>
                                 <Link to={'/'} className='link'>Home</Link>
                             </li>
-                            {collections.map((item) => {
-                                return(
-                                    <li className='item'>
-                                        <Link to={`/collection/${item.id}`} className='link'>{item.title}</Link>
-                                    </li>
-                                )
-                            })}
+                            {collections.map((item) => <Menu key={item.id} collection={item} />)}
                         </ul>
                     </nav>
                 </div>

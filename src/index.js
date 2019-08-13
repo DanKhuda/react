@@ -6,6 +6,7 @@ import {Provider} from "react-redux";
 import Layout from "./components/layout";
 import Home from "./components/pages/home";
 import Image from "./components/pages/image";
+import Collection from "./components/pages/collection";
 import store from './redux/store';
 
 const history = syncHistoryWithStore(browserHistory, store);
@@ -16,6 +17,7 @@ ReactDOM.render(
             <Route component={Layout}>
                 <Route path='/' component={Home} />
                 <Route path='image/:id' component={Image} />
+                <Route path='collection/:id' component={Collection} />
             </Route>
         </Router>
     </Provider>,

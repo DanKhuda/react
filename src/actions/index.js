@@ -8,7 +8,11 @@ import {
     FETCH_LOAD_IMAGES_START,
     FETCH_LOAD_IMAGES_FAILURE,
     FETCH_LOAD_IMAGES_SUCCESS,
-    FETCH_COLLECTIONS_START, FETCH_COLLECTIONS_FAILURE, FETCH_COLLECTIONS_SUCCESS
+    FETCH_COLLECTIONS_START,
+    FETCH_COLLECTIONS_FAILURE,
+    FETCH_COLLECTIONS_SUCCESS,
+    FETCH_COLLECTION_BY_ID_START,
+    FETCH_COLLECTION_BY_ID_FAILURE, FETCH_COLLECTION_BY_ID_SUCCESS
 } from "../actionTypes";
 
 import {
@@ -173,5 +177,47 @@ export const fetchCollections = () => {
             .then(response => response.json())
             .then(items => dispatch(collectionsFetchSuccess(items)))
             .catch(() => dispatch(collectionsFetchFailed(true)))
+    };
+};
+
+
+
+export const collectionFetchStart = start => {
+    return {
+        type: FETCH_COLLECTION_BY_ID_START,
+        isLoading: start
+    };
+};
+
+export const collectionFetchFailed = error => {
+    return {
+        type: FETCH_COLLECTION_BY_ID_FAILURE,
+        error
+    }
+};
+
+export const collectionFetchSuccess = collection => {
+    return {
+        type: FETCH_COLLECTION_BY_ID_SUCCESS,
+        collection
+    }
+};
+
+export const fetchCollectionById = (id) => {
+    const userId = '24b892b15e1d6bdefacce0a40024ac9f02dc98242074a8cf88f1e2305c143762';
+    const url = `${apiCollectionsUrl}${id}/?client_id=${userId}`;
+    return dispatch => {
+        dispatch(collectionFetchStart(true));
+        fetch(url)
+            .then(response => {
+                if (!response.ok) {
+                    throw Error(response.statusText);
+                }
+                dispatch(collectionFetchStart(false));
+                return response;
+            })
+            .then(response => response.json())
+            .then(items => dispatch(collectionFetchSuccess(items)))
+            .catch(() => dispatch(collectionFetchFailed(true)))
     };
 };
