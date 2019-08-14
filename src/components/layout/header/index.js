@@ -4,7 +4,6 @@ import "./header.css"
 import logo from '../../../assets/logo.png';
 import {connect} from "react-redux";
 import {fetchCollections} from "../../../actions";
-import ImageCard from "../../imageCard";
 import Menu from "../menu";
 
 
@@ -28,9 +27,6 @@ class Header extends Component{
                     </div>
                     <nav className='menu'>
                         <ul className='navigation'>
-                            <li className='item'>
-                                <Link to={'/'} className='link'>Home</Link>
-                            </li>
                             {collections.map((item) => <Menu key={item.id} collection={item} />)}
                         </ul>
                     </nav>

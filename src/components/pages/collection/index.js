@@ -1,8 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from "react-redux";
 import './collection.css';
-import {fetchCollectionById, fetchCollections} from "../../../actions";
-import collectionPage from "../../../reducers/collectionPage";
+import {fetchCollectionById} from "../../../actions";
 
 class Collection extends Component {
     constructor(props) {
@@ -22,12 +21,13 @@ class Collection extends Component {
 
     render() {
         const {collection} = this.props;
-        console.log(collection);
         return(
-            <div>
-                <h1>{collection.title}</h1>
-                {collection.cover_photo && <img src={ collection.cover_photo.urls.small} alt=""/>}
-            </div>
+            <section className="collection">
+                <div className="collection__content">
+                    <h2 className="collection__title">{collection.title}</h2>
+                    {collection.cover_photo && <img src={ collection.cover_photo.urls.small} className="collection__image" alt={collection.cover_photo.alt_description} />}
+                </div>
+            </section>
         )
     }
 }
