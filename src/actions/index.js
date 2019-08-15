@@ -41,9 +41,9 @@ export const searchImagesFetchSuccess = searchImages => {
     }
 };
 
-export const fetchSearchImages = (query, page) => {
+export const fetchSearchImages = (query) => {
     const userId = '24b892b15e1d6bdefacce0a40024ac9f02dc98242074a8cf88f1e2305c143762';
-    const url = `${apiSearchImagesUrl}?query=${query}&page=${page}&client_id=${userId}`;
+    const url = `${apiSearchImagesUrl}?query=${query}&client_id=${userId}`;
     return dispatch => {
         dispatch(searchImagesFetchStart(true));
         fetch(url)

@@ -1,14 +1,14 @@
-import React, {Component} from 'react';
+import React, {Component, PureComponent} from 'react';
 import {connect} from "react-redux";
 import ImageCard from '../imageCard';
 import './image-list.css';
 import {fetchLoadImages} from "../../actions";
 
-class ImageList extends Component {
+class ImageList extends PureComponent {
     constructor(props) {
         super(props);
         this.state = {
-            page: 0
+            page: 1
         };
     }
 

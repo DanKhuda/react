@@ -10,9 +10,12 @@ class Home extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            val: '',
-            page: 0
+            val: 'popular'
         }
+    }
+
+    componentDidMount() {
+        this.props.fetchSearchImages(this.state.val);
     }
 
     onInputChange = (event) => {
@@ -21,11 +24,11 @@ class Home extends Component {
 
     onFormSubmit  = (event) => {
         event.preventDefault();
-        this.setState({page: this.state.page+1});
-        this.props.fetchSearchImages(this.state.val, this.state.page);
+        this.props.fetchSearchImages(this.state.val);
     };
 
     render() {
+        const {isLoading} = this.props;
         return (
             <div className="home">
                 <div className="banner">
@@ -33,14 +36,24 @@ class Home extends Component {
                         <Search value={this.state.value} onChange={this.onInputChange} onSubmit={this.onFormSubmit} />
                     </div>
                 </div>
+                {
+                    isLoading ? "Loading" : null
+                }
                 <ImageList query={this.state.val} />
             </div>
         )
     }
 }
 
+const mapStateToProps = state => {
+    const {isLoading} = state.resultPage;
+    return {
+        isLoading: isLoading
+    }
+};
+
 const mapDispatchToProps = {
     fetchSearchImages
 };
 
-export default connect(null, mapDispatchToProps)(Home);
+export default connect(mapStateToProps, mapDispatchToProps)(Home);

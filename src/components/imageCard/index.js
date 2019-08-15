@@ -1,5 +1,6 @@
 import React from 'react';
 import {Link} from "react-router";
+import PropTypes from "prop-types";
 
 const ImageCard = (props) => {
     const { image } = props;
@@ -10,6 +11,26 @@ const ImageCard = (props) => {
             </Link>
         </div>
     )
+};
+
+ImageCard.propTypes = {
+    image: PropTypes.shape({
+        urls: PropTypes.shape({
+            small: PropTypes.string
+        }),
+        alt_description: PropTypes.string,
+        id: PropTypes.number
+    }).isRequired
+};
+
+ImageCard.defaultProps = {
+    image: {
+        id: 'id',
+        alt_description: 'description',
+        urls:{
+            small: 'image.jpg'
+        }
+    }
 };
 
 export default  ImageCard;
