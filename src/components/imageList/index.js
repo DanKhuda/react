@@ -18,8 +18,9 @@ class ImageList extends Component {
     }
 
     onPaginatedSearch = (e) => {
-        this.setState({page: this.state.page + 1});
-        this.props.fetchLoadImages(this.props.query, this.state.page);
+        this.setState({page: this.state.page + 1}, () => {
+            this.props.fetchLoadImages(this.props.query, this.state.page);
+        });
     };
 
     onScroll = () => {
