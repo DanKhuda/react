@@ -2,13 +2,9 @@ import React, {Component} from 'react';
 import {connect} from "react-redux";
 import './collection.css';
 import {fetchCollectionById} from "../../../actions";
+import PropTypes from "prop-types";
 
 class Collection extends Component {
-    constructor(props) {
-        super(props);
-    }
-
-
     componentDidMount() {
         this.props.fetchCollectionById(this.props.params.id);
     }
@@ -31,6 +27,32 @@ class Collection extends Component {
         )
     }
 }
+
+Collection.propTypes = {
+    collection: PropTypes.shape({
+        id: PropTypes.number,
+        title: PropTypes.string,
+        cover_photo: PropTypes.shape({
+            urls: PropTypes.shape({
+                small: PropTypes.string
+            }),
+            alt_description: PropTypes.string
+        }),
+    })
+};
+
+Collection.defaultProps = {
+    collection: {
+        id: 1,
+        title: 'title',
+        cover_photo: {
+            urls: {
+                small: 'small.jpg'
+            },
+            alt_description: 'alt_desc'
+        }
+    }
+};
 
 const mapStateToProps = state => {
     const {collection} = state.collectionPage;

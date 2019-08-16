@@ -19,17 +19,17 @@ ImageCard.propTypes = {
             small: PropTypes.string
         }),
         alt_description: PropTypes.string,
-        id: PropTypes.number
+        id: PropTypes.string
     }).isRequired
 };
 
 ImageCard.defaultProps = {
     image: {
-        id: 'id',
-        alt_description: 'description',
         urls:{
             small: 'image.jpg'
-        }
+        },
+        alt_description: 'description',
+        id: '1'
     }
 };
 

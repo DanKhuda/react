@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {connect} from "react-redux";
 import {withRouter} from "react-router";
 import {fetchImageById} from "../../../actions";
-import {object} from "prop-types";
+import PropTypes from "prop-types";
 import location from "../../../assets/location.png"
 import downloads from "../../../assets/download.png"
 
@@ -42,17 +42,33 @@ class Image extends Component {
 }
 
 Image.propTypes = {
-  image: object
+    image: PropTypes.shape({
+        urls: PropTypes.shape({
+            regular: PropTypes.string
+        }),
+        location: PropTypes.shape({
+            title: PropTypes.string
+        }),
+        alt_description: PropTypes.string,
+        description: PropTypes.string,
+        id: PropTypes.string,
+        downloads: PropTypes.number
+    }).isRequired
 };
 
 Image.defaultProps = {
-  image: {
-      description: "Default description",
-      location: 'Default loc',
-      urls: {
-          full: "test"
-      }
-  }
+    image: {
+        urls: {
+            regular: "regular.jpg"
+        },
+        location: {
+            title: "title"
+        },
+        alt_description: "alt",
+        description: "desc",
+        id: '1',
+        downloads: 1
+    }
 };
 
 const mapStateToProps = state => {

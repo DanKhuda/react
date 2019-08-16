@@ -5,6 +5,7 @@ import logo from '../../../assets/logo.png';
 import {connect} from "react-redux";
 import {fetchCollections} from "../../../actions";
 import Menu from "../menu";
+import PropTypes from "prop-types";
 
 
 class Header extends Component{
@@ -35,6 +36,14 @@ class Header extends Component{
         )
     }
 }
+
+Header.propTypes = {
+    collections: PropTypes.array
+};
+
+Header.defaultProps = {
+    collections: []
+};
 
 const mapStateToProps = state => {
     const {collections} = state.collectionPage;

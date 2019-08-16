@@ -3,8 +3,9 @@ import Search from "../../search"
 import ImageList from "../../imageList";
 import {fetchSearchImages} from "../../../actions";
 import {connect} from "react-redux";
-
+import PropTypes from "prop-types";
 import "./home.css"
+
 
 class Home extends Component {
     constructor(props) {
@@ -44,6 +45,14 @@ class Home extends Component {
         )
     }
 }
+
+Home.propTypes = {
+    isLoading: PropTypes.bool
+};
+
+Home.defaultProps = {
+    isLoading: true
+};
 
 const mapStateToProps = state => {
     const {isLoading} = state.resultPage;

@@ -4,7 +4,7 @@ import { render } from 'enzyme';
 
 describe('ImageCard ', () => {
     const imageMock = {
-        id: 123,
+        id: '123',
         alt_description: 'Alt Desc',
         urls:{
             small: 'somePng.jpg',

@@ -1,10 +1,11 @@
-import React, {Component, PureComponent} from 'react';
+import React, {Component} from 'react';
 import {connect} from "react-redux";
 import ImageCard from '../imageCard';
 import './image-list.css';
 import {fetchLoadImages} from "../../actions";
+import PropTypes from "prop-types";
 
-class ImageList extends PureComponent {
+class ImageList extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -28,7 +29,7 @@ class ImageList extends PureComponent {
     };
 
     render() {
-        const {resImages = []} = this.props;
+        const {resImages} = this.props;
         return (
             <section className="image-list">
                 <div className="image-list__content">
@@ -44,6 +45,14 @@ class ImageList extends PureComponent {
         window.removeEventListener('scroll', this.onScroll, false);
     }
 }
+
+ImageList.propTypes = {
+    resImages: PropTypes.array
+};
+
+ImageList.defaultProps = {
+    resImages: []
+};
 
 const mapStateToProps = state => {
     const {searchImages} = state.resultPage;
